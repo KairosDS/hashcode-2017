@@ -1,0 +1,23 @@
+{
+  "name": "hashcode-2017",
+  "version": "1.0.0",
+  "description": "Team up to solve a real-life engineering problem from Google. We are up for the challenge!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KairosDS/hashcode-2017.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KairosDS/hashcode-2017/issues"
+  },
+  "homepage": "https://github.com/KairosDS/hashcode-2017#readme",
+  "dependencies": {
+    "command-line-args": "^4.0.1",
+    "readline": "^1.3.0"
+  }
+}
