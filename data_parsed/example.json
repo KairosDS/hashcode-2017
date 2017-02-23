@@ -1,28 +1,55 @@
 {
-  "videos": [50, 50, 80, 30, 100],
-  "endpoints": [{
+  "summary": {
+    "videos": 5,
+    "endpoints": 2,
+    "videoRequests": 4,
+    "caches": 3
+  },
+  "videos": [
+    50,
+    50,
+    80,
+    30,
+    110
+  ],
+  "endpoints": {
+    "0": {
       "latency": 1000,
-      "caches": [100, 300, 200]
-    }, {
+      "cacheLength": 3,
+      "caches": {
+        "0": 100,
+        "1": 300,
+        "2": 200
+      }
+    },
+    "1": {
       "latency": 500,
+      "cacheLength": 0,
       "caches": {}
     }
+  },
+  "caches": 0,
+  "videoRequests": [
+    {
+      "video": 3,
+      "endpoint": 0,
+      "requests": 1500
+    },
+    {
+      "video": 0,
+      "endpoint": 1,
+      "requests": 1000
+    },
+    {
+      "video": 4,
+      "endpoint": 0,
+      "requests": 500
+    },
+    {
+      "video": 1,
+      "endpoint": 0,
+      "requests": 1000
+    }
   ],
-  "videoRequests": [{
-    "video": 3,
-    "endpoint": 0,
-    "requests": 1500
-  }, {
-    "video": 0,
-    "endpoint": 1,
-    "requests": 1000
-  }, {
-    "video": 4,
-    "endpoint": 0,
-    "requests": 500
-  }, {
-    "video": 1,
-    "endpoint": 0,
-    "requests": 1000
-  }]
+  "cacheSize": 100
 }
