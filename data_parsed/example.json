@@ -5,7 +5,7 @@
       "caches": [100, 300, 200]
     }, {
       "latency": 500,
-      "caches": {}
+      "caches": []
     }
   ],
   "videoRequests": [{
