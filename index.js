@@ -15,27 +15,36 @@ const options = require('command-line-args')([{
   type: String,
   multiple: false,
   defaultOption: false
+}, {
+  name: 'prettify',
+  alias: 'p',
+  type: Boolean
 }]);
 
-function saveFile(output, data) {
+function saveFile(output, data, prettify) {
   const pathParsed = path.parse(output);
   if (!fs.existsSync(pathParsed.dir)){
     fs.mkdirSync(pathParsed.dir);
   }
-  data = JSON.stringify(data);
+  if (prettify) {
+    data = JSON.stringify(data, null, 2);
+  } else {
+    data = JSON.stringify(data);
+  }
   return new Promise(function (success, reject) {
     fs.writeFile(output, data, (err) => {
       if (err) reject(err);
       success(output);
     });
-  });i}
+  })
+}
 
-function parseInput(input, output) {
+function parseInput(input, output, prettify) {
   const time = new Date();
   parser.parseFile(input)
     .then(function(data) {
       if (output) {
-        saveFile(output, data).then(function(){
+        saveFile(output, data, prettify).then(function(){
           const processTime = new Date() - time;
           console.log(`${output} processed in ${processTime} ms.`);
         })
@@ -44,4 +53,4 @@ function parseInput(input, output) {
     .catch(console.error.bind(console));
 }
 console.log(options);
-parseInput(options.input, options.output);
+parseInput(options.input, options.output, options.prettify);

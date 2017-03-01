@@ -12,6 +12,7 @@ Usage: node index [options]
 Options:
   -i, --input      input file to parse.
   -o, --output     output path to save it parsed as json.
+  -p, --pretty     output prettified
 
 ```
 
@@ -27,6 +28,14 @@ $ node index data/example.in
 With output path:
 
 ```
-$ node index data/example.in --output ".temp/example.json"
-$ node index data/example.in -o ".temp/example.json"
+$ node index data/example.in --output .temp/example.json
+$ node index data/example.in -o .temp/example.json
+```
+
+Output prettified:
+
+```
+$ node index data/example.in --pretty --output .temp/example.json
+$ node index data/example.in -p -o .temp/example.json
+$ node index data/example.in -po .temp/example.json
 ```
