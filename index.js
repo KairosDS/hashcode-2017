@@ -37,10 +37,10 @@ data = {
 let s = score(data, 0);
 
 let timeSaved = data.videos.map((val, idx) => {
-  console.log(idx, score(data, idx));
+  //console.log(idx, score(data, idx));
   return {size: val, score: score(data, idx)};
 });
 
 let p = prc(data, timeSaved);
 
-console.log(p);
+//console.log(p);
