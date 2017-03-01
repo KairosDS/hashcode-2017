@@ -36,8 +36,8 @@ function saveFile(output, data, prettify) {
       if (err) reject(err);
       success(output);
     });
-  })
-}
+  });
+};
 
 function parseInput(input, output, prettify) {
   const time = new Date();
@@ -48,9 +48,18 @@ function parseInput(input, output, prettify) {
           const processTime = new Date() - time;
           console.log(`${output} processed in ${processTime} ms.`);
         })
-       }
+      }
+      return data;
+    })
+    .then(function(data) {
+      //get scores for first 5 videos
+      console.log('0>',require('./lib/score')(data, "0"));
+      console.log('1>',require('./lib/score')(data, "1"));
+      console.log('2>',require('./lib/score')(data, "2"));
+      console.log('3>',require('./lib/score')(data, "3"));
+      console.log('4>',require('./lib/score')(data, "4"));
     })
     .catch(console.error.bind(console));
-}
+};
 console.log(options);
 parseInput(options.input, options.output, options.prettify);
