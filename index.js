@@ -2,6 +2,8 @@
 const path = require('path');
 const fs = require('fs');
 const parser = require('./lib/parser');
+const score = require('./lib/score')
+const knapsack = require('./lib/knapsack');
 
 const options = require('command-line-args')([{
   name: 'input',
@@ -21,40 +23,26 @@ const options = require('command-line-args')([{
   type: Boolean
 }]);
 
-function saveFile(output, data, prettify) {
+function saveFile(output, data) {
   const pathParsed = path.parse(output);
   if (!fs.existsSync(pathParsed.dir)){
     fs.mkdirSync(pathParsed.dir);
   }
-  if (prettify) {
-    data = JSON.stringify(data, null, 2);
-  } else {
-    data = JSON.stringify(data);
-  }
-  return new Promise(function (success, reject) {
-    fs.writeFile(output, data, (err) => {
-      if (err) reject(err);
-      success(output);
-    });
-  });
+  return fs.writeFile(output, data);
 };
 
-function parseInput(input, output, prettify) {
+function parseInput(input, output) {
   const time = new Date();
   parser.parseFile(input)
-    .then(function(data) {
-      if (output) {
-        saveFile(output, data, prettify).then(function(){
-          const processTime = new Date() - time;
-          console.log(`${output} processed in ${processTime} ms.`);
-        })
-      }
+    .then((data) => {
+      fs.writeFile('test', JSON.stringify(data, null, 2));
       return data;
     })
-    .then(data => {
-      console.log('caches >>>>',require('./lib/score')(data));
-    })
+    .then(score)
+    .then((data) => data.caches.map((cache, cacheId) => knapsack(cache, data.size)))
+    .then(parser.outputFile)
+    .then(saveFile.bind(this, output))
     .catch(console.error.bind(console));
 };
-console.log(options);
-parseInput(options.input, options.output, options.prettify);
+
+parseInput(options.input, options.output || options.input.replace('.in', '.out'));
